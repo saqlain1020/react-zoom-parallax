@@ -15,7 +15,7 @@ import Im5 from "./assets/images/hill.jpg";
 function App() {
   return (
     <div className="App" style={{width:"100vw",height:"100vh"}}>
-      <MainContainer
+      <ZoomSlider
         images={[
           { front: Im2, back: Im1 },
           { front: Im2, back: Im3 },
