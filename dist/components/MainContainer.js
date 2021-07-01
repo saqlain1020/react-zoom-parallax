@@ -27,20 +27,26 @@ const MainContainer = _ref => {
 
   const [image3, setImage3] = _react.default.useState();
 
+  const [title, setTitle] = _react.default.useState("");
+
+  const [ind, setInd] = _react.default.useState(-1);
+
   const getNextImages = index => {
     if (index >= images.length - 1) {
       return {
         index: 0,
         front: images[0].front,
-        back: images[0].back
+        back: images[0].back,
+        title: images[0].title,
+        subTitle: images[0].subTitle
       };
     } else {
-      console.log(index);
-      console.log(images[index + 1].front);
       return {
         index: index + 1,
         front: images[index + 1].front,
-        back: images[index + 1].back
+        back: images[index + 1].back,
+        title: images[index + 1].title,
+        subTitle: images[index + 1].subTitle
       };
     }
   };
@@ -49,42 +55,60 @@ const MainContainer = _ref => {
     let obj = getNextImages(-1);
     setImage1({
       front: obj.front,
-      back: obj.back
+      back: obj.back,
+      title: obj.title,
+      subTitle: obj.subTitle
     });
     obj = getNextImages(obj.index);
     setImage2({
       front: obj.front,
-      back: obj.back
+      back: obj.back,
+      title: obj.title,
+      subTitle: obj.subTitle
     });
     obj = getNextImages(obj.index);
     setImage3({
       front: obj.front,
-      back: obj.back
+      back: obj.back,
+      title: obj.title,
+      subTitle: obj.subTitle
     });
+    setTitle(0);
+    setTimeout(() => {
+      setTitle(1);
+    }, 2000);
+    setTimeout(() => {
+      setTitle(2);
+    }, 4000);
     return obj.index;
   };
+
+  console.log(title, image1, image2, image3);
 
   _react.default.useEffect(() => {
     let ind = init();
     let interval = setInterval(() => {
+      // console.log(ind)
       let obj = getNextImages(ind);
       ind = obj.index;
       setImage1(obj);
+      setTitle(3);
       setTimeout(() => {
-        let obj = getNextImages(ind);
+        obj = getNextImages(ind);
         ind = obj.index;
         setImage2(obj);
-      }, 1000);
+        setTitle(1);
+      }, 2000);
       setTimeout(() => {
-        let obj = getNextImages(ind);
+        obj = getNextImages(ind);
         ind = obj.index;
         setImage3(obj);
-      }, 2000);
-    }, 3000);
+        setTitle(2);
+      }, 4000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [images]);
 
-  console.log(image1, image2, image3);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: _mainModule.default.container,
     style: {
@@ -126,7 +150,9 @@ const MainContainer = _ref => {
     style: {
       backgroundImage: "url(".concat(image3 === null || image3 === void 0 ? void 0 : image3.front, ")")
     }
-  })));
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: _mainModule.default.titleDiv
+  }, /*#__PURE__*/_react.default.createElement("h1", null, title === 1 ? image1 === null || image1 === void 0 ? void 0 : image1.title : title === 2 ? image2 === null || image2 === void 0 ? void 0 : image2.title : title === 3 ? image3 === null || image3 === void 0 ? void 0 : image3.title : ""), /*#__PURE__*/_react.default.createElement("p", null, title === 1 ? image1 === null || image1 === void 0 ? void 0 : image1.subTitle : title === 2 ? image2 === null || image2 === void 0 ? void 0 : image2.subTitle : title === 3 ? image3 === null || image3 === void 0 ? void 0 : image3.subTitle : "")));
 };
 
 var _default = MainContainer;
@@ -134,7 +160,9 @@ exports.default = _default;
 MainContainer.propTypes = {
   images: _propTypes.default.arrayOf(_propTypes.default.shape({
     front: _propTypes.default.any,
-    back: _propTypes.default.any
+    back: _propTypes.default.any,
+    title: _propTypes.default.string,
+    subTitle: _propTypes.default.string
   })).isRequired,
   background: _propTypes.default.string
 };

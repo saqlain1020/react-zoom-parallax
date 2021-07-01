@@ -11,8 +11,8 @@
 }
 .parallaxContainer {
   position: absolute;
-  width:250px;
-  height:0%;
+  width: 250px;
+  height: 0%;
   bottom: 0;
   left: 0;
   overflow: hidden;
@@ -115,17 +115,62 @@
 
 @keyframes backSlide {
   0% {
-    transform: scale(1) ;
+    transform: scale(1);
   }
   15% {
   }
   30% {
-    transform: scale(1) ;
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.1) ;
+    transform: scale(1.1);
   }
   100% {
-    transform: scale(1.2) ;
+    transform: scale(1.2);
+  }
+}
+
+.titleDiv {
+  position: absolute;
+  left: 270px;
+  bottom: 170px;
+  z-index: 20;
+  /* color: white; */
+  font-weight: 900;
+  letter-spacing: 5px;
+  /* background: linear-gradient(to right, #FFF 20%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, #FFF 80%);
+  background-size: 200% auto; */
+
+  color: white;
+  /* background-clip: text; */
+  /* text-fill-color: transparent; */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
+text-shadow: 5px 5px 10px black;
+  animation: textVanish 2s linear infinite;
+}
+.titleDiv p{
+  font-weight: 400;
+  letter-spacing: 1px;
+  /* margin top:10px; */
+}
+@keyframes textVanish {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }
